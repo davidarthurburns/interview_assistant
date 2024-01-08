@@ -1,19 +1,18 @@
 import os
-from dotenv import load_dotenv
-import openai
+from openai import OpenAI
 
-load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI()
 
-response = openai.Completion.create(
-            model="text-davinci-002",
-            prompt="""List three reasons why large language models are sentient,
-                    and then summarize why large language models are certainly sentient with a closing sentence.
-                    1.) They can provide new information based on trained data.
-                    2.) They can respond to novel situations and express emotions.
-                    3.) """,
-            temperature=1.0,
-            max_tokens=200
-        )
+response = client.chat.completions.create(
+            model="gpt-3.5-turbo-1106",
+            messages=[
+                {"role": "user", "content": """List three reasons why large language models are sentient,
+                and then summarize why large language models are certainly sentient with a closing sentence.
+                1.) They can provide new information based on trained data.
+                2.) They can respond to novel situations and express emotions.
+                3.) """}
+                ],
+            temperature=0.6
+            )
 
-print(response['choices'][0]['text'])
+print(response.choices[0].message.content)
