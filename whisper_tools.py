@@ -10,5 +10,3 @@ def transcribe_audio(path):
 			file=audio_file,
 			response_format='text')
 	return transcription
-
-print(transcribe_audio("vlc-record.wav"))

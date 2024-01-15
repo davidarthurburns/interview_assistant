@@ -1,16 +1,14 @@
 import os
 from openai import OpenAI
+from whisper_tools import transcribe_audio
 
 client = OpenAI()
 
 response = client.chat.completions.create(
             model="gpt-3.5-turbo-1106",
             messages=[
-                {"role": "user", "content": """List three reasons why large language models are sentient,
-                and then summarize why large language models are certainly sentient with a closing sentence.
-                1.) They can provide new information based on trained data.
-                2.) They can respond to novel situations and express emotions.
-                3.) """}
+				{"role": "system", "content": """You are an advanced novel-writing individual. Please take this small piece of writing and add words before and after to form a complete segment of a story."""},
+                {"role": "user", "content": transcribe_audio("ignore\\vlc-record.mp3")}
                 ],
             temperature=0.6
             )
