@@ -1,6 +1,6 @@
 import sounddevice as sd
+import soundfile as sf
 from scipy.io.wavfile import write
-import wavio as wv
 
 freq = 44100
 

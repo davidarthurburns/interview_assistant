@@ -17,7 +17,7 @@ while(1):
 	assistant_response = client.chat.completions.create(
 		model=model_used,
         messages=ongoing_messages,
-        temperature=0.6
+        temperature=0.6,
     )
 
 	print(assistant_response.choices[0].message.content)
