@@ -2,6 +2,7 @@ import os
 from openai import OpenAI
 from completion_tools import summarize_listing
 from audio_tools import record_audio
+from whisper_tools import transcribe_audio
 
 client = OpenAI()
 
@@ -24,9 +25,9 @@ while(1):
 	print()
 
 	ongoing_messages.append({"role": "assistant", "content": assistant_response.choices[0].message.content})
-
-    #TODO: PULL INPUT FROM RECORDED AUDIO
-	user_response = input("Please type your response: ")
+	
+	filename = record_audio()
+	user_response = transcribe_audio(filename)
 	print()
 
 	ongoing_messages.append({"role": "user", "content": user_response})
