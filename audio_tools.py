@@ -4,9 +4,11 @@ from scipy.io.wavfile import write
 import queue
 import argparse
 import tempfile
+from openai import OpenAI
 
 freq = 44100
 q = queue.Queue()
+client = openAI()
 
 def callback(indata, frames, time, status):
     if status:
@@ -27,13 +29,3 @@ def record_audio():
 	except KeyboardInterrupt:
 		print('\nRecording finished: ')
 	return filename
-
-
-"""try:
- if args.samplerate is None:
-        device_info = sd.query_devices(args.device, 'input')
-        # soundfile expects an int, sounddevice provides a float:
-        args.samplerate = int(device_info['default_samplerate'])
-    if args.filename is None:
-        args.filename = tempfile.mktemp(prefix='delme_rec_unlimited_',
-                                        suffix='.wav', dir='')"""
