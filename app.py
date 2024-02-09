@@ -1,0 +1,13 @@
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def index():
+    return "Test"
+
+
+@app.route("/sub")
+def sub():
+    return "Subdirectory"
