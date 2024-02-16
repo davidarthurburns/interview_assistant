@@ -10,3 +10,8 @@ def index(job_listing=job_listing):
     if request.method == "POST":
         job_listing = request.form.get("listing")
     return render_template("base.html", listing=job_listing)
+
+@app.route("/interview", methods = ["POST"])
+def interview(job_listing):
+    """TODO: ADD INTERVIEW LOOP"""
+    return render_template("interview.html")
