@@ -6,12 +6,11 @@ job_listing = "Please submit a job listing below."
 
 
 @app.route("/", methods=["GET", "POST"])
-def index(job_listing=job_listing):
+def index(job_listing=job_listing, jd_submitted=False):
     if request.method == "POST":
         job_listing = request.form.get("listing")
     return render_template("base.html", listing=job_listing)
 
 @app.route("/interview", methods = ["POST"])
 def interview(job_listing):
-    """TODO: ADD INTERVIEW LOOP"""
     return render_template("interview.html")

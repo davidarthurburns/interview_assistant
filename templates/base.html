@@ -11,10 +11,12 @@
             <input type = "text" name="listing" placeholder="Input job listing">
             <button>Submit</button>
         </form>
-		{% if jd_submitted = True %}
+		
+		{% if jd_submitted == True %}
 		<form action ="{{ url_for('interview') }}" method="post">
             <button>Start Interview</button>
         </form>
 		{% endif %}
+		
     </body>
 </html>
