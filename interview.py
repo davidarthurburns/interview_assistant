@@ -4,30 +4,32 @@ from completion_tools import summarize_listing
 from audio_tools import record_audio, play_audio
 from whisper_tools import transcribe_audio, generate_audio
 
-client = OpenAI()
+def Interview(listing):
 
-model_used = "gpt-3.5-turbo-1106"
+    client = OpenAI()
 
-ongoing_messages = [
-    {"role": "system", "content": """You are an assistant capable of conducting efficient job interviews with candidates.
-	Generate one new question at a time and answer the candidate's questions to determine if they meet the requirements and proficiencies described below."""},
-    {"role": "system", "content": summarize_listing("ignore\\listing2.txt")}
-]
+    model_used = "gpt-3.5-turbo-1106"
 
-while 1:
-    assistant_response = client.chat.completions.create(
-        model=model_used,
-        messages=ongoing_messages,
-        temperature=0.6,
-    )
+    ongoing_messages = [
+        {"role": "system", "content": """You are an assistant capable of conducting efficient job interviews with candidates.
+        Generate one new question at a time and answer the candidate's questions to determine if they meet the requirements and proficiencies described below."""},
+        {"role": "system", "content": summarize_listing(listing)}
+    ]
 
-    play_audio(generate_audio(assistant_response.choices[0].message.content))
-    print()
+    while 1:
+        assistant_response = client.chat.completions.create(
+            model=model_used,
+            messages=ongoing_messages,
+            temperature=0.6,
+        )
 
-    ongoing_messages.append({"role": "assistant", "content": assistant_response.choices[0].message.content})
+        play_audio(generate_audio(assistant_response.choices[0].message.content))
+        print()
 
-    filename = record_audio()
-    user_response = transcribe_audio(filename)
-    print()
+        ongoing_messages.append({"role": "assistant", "content": assistant_response.choices[0].message.content})
 
-    ongoing_messages.append({"role": "user", "content": user_response})
+        filename = record_audio()
+        user_response = transcribe_audio(filename)
+        print()
+
+        ongoing_messages.append({"role": "user", "content": user_response})
