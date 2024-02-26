@@ -12,6 +12,10 @@ def index(job_listing=job_listing):
     if request.method == "POST":
         job_listing = request.form.get("listing")
         jd_submitted = True
+        jd_filename = tempfile.mktemp(prefix='job_desc_', suffix='.txt', dir = 'ignore')
+        with open (jd_filename, 'w') as file:
+            file.write(job_listing)
+        Interview(jd_filename)
     else:
         jd_submitted = False
     return render_template("base.html", listing=job_listing, jd_submitted=jd_submitted)

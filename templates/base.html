@@ -6,17 +6,10 @@
     <body>
         <h1>Interview Assistant</h1>
         <h2>ChatGPT-Enabled Dialog Interpreter</h2>
-        <p>{{ listing }}</p>
         <form action ="{{ url_for('index') }}" method="post">
             <input type = "text" name="listing" placeholder="Input job listing">
-            <button>Submit</button>
-        </form>
-		
-		{% if jd_submitted == True %}
-		<form action ="{{ url_for('interview') }}" method="post">
             <button>Start Interview</button>
         </form>
-		{% endif %}
 		
     </body>
 </html>
